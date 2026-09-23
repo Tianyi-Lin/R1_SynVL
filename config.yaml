@@ -1,0 +1,65 @@
+paper: https://arxiv.org/html/2602.03300v2
+questions_per_seed: 8
+max_iterations: 10
+target_size: null
+seed_memory_dir: seed_memory
+
+# 默认输入须符合 EasyR1 官方推荐的图文数据集格式，参考 hiyouga/geometry3k。
+# 每条记录包含 problem（带 <image> 占位符）、answer（字符串）、images（图片列表）。
+# 扩展其他同格式数据集时替换 path；列名不同时调整 prompt_key/answer_key/image_key。
+dataset:
+  path: hiyouga/geometry3k
+  name: null
+  split: train
+  revision: main
+  prompt_key: problem
+  answer_key: answer
+  image_key: images
+  id_key: null
+  image_cache_dir: dataset/seed_images
+
+models:
+  - name: gpt-4o
+    model: gpt-4o
+    provider: openai
+    visual_mode: native
+    base_url_env: GPT4O_BASE_URL
+    api_key_env: GPT4O_API_KEY
+    temperature: 0.7
+  - name: gemini-2.5-pro
+    model: google/gemini-2.5-pro
+    provider: openai
+    visual_mode: native
+    base_url_env: OPENROUTER_BASE_URL
+    api_key_env: OPENROUTER_API_KEY
+  - name: deepseek-r1
+    model: deepseek-r1
+    provider: openai
+    visual_mode: caption
+    base_url_env: DEEPSEEK_BASE_URL
+    api_key_env: DEEPSEEK_API_KEY
+  - name: claude-sonnet-4-6
+    model: claude-sonnet-4-6
+    provider: anthropic
+    visual_mode: native
+    base_url_env: CLAUDE_BASE_URL
+    api_key_env: CLAUDE_API_KEY
+    anthropic_version: "2023-06-01"
+    max_tokens: 1024
+
+caption_model: gemini-2.5-pro
+reflection_model: gpt-4o
+equivalence_model: gpt-4o
+
+image_generation:
+  enabled: false
+  provider: openrouter
+  model: google/gemini-3-pro-image
+  base_url_env: OPENROUTER_BASE_URL
+  api_key_env: OPENROUTER_API_KEY
+  aspect_ratio: "1:1"
+  # OpenRouter 上 Nano Banana Pro 支持的最低分辨率，也是默认值。
+  resolution: "1K"
+
+request_timeout: 180
+json_attempts: 3

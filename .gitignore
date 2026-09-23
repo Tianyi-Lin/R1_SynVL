@@ -1,0 +1,14 @@
+.venv/
+.cache/
+.tools/
+.tmp/
+.python/
+__pycache__/
+*.py[cod]
+.env
+.env.*
+!.env.example
+seed_memory/
+seed_images/
+dataset/
+outputs/

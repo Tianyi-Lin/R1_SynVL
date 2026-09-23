@@ -1,0 +1,22 @@
+questions_per_seed: 1
+
+models:
+  - name: gemini-2.5-pro
+    model: google/gemini-2.5-pro
+    provider: openai
+    visual_mode: native
+    base_url_env: OPENROUTER_BASE_URL
+    api_key_env: OPENROUTER_API_KEY
+
+caption_model: gemini-2.5-pro
+reflection_model: gemini-2.5-pro
+equivalence_model: gemini-2.5-pro
+
+image_generation:
+  enabled: false
+  provider: openrouter
+  model: google/gemini-3-pro-image
+  base_url_env: OPENROUTER_BASE_URL
+  api_key_env: OPENROUTER_API_KEY
+  aspect_ratio: "1:1"
+  resolution: "1K"
